@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+    	#header{
+    		width: 100%;
+    		height: 50px;
+    		text-align: center;
+    		position: fixed;
+    		left: 0;
+    		top: 0;
+    		line-height: 50px;
+    		opacity: 1;
+    		box-shadow: 1px 4px 10px rgba(0,0,0, 0.1);
+		    -webkit-transition: -webkit-transform .3s,opacity .3s,visibility .3s;
+    		transition: transform .3s,opacity .3s,visibility .3s;
+    	}
+    	.content-box{
+    		-webkit-transform: translate3d(0,-100%,0);
+		    transform: translate3d(0,-100%,0);
+		    visibility: hidden;
+		    opacity: 0;
+		    pointer-events: none;
+    	}
+  	</style>
+</head>
+<body>
+	<div id="header">
+    	<span class="select">家用电器</span>
+        <span>家具</span>
+        <span>汽车</span>
+        <span>食品</span>
+        <span>女鞋</span>
+        <span>医疗保健</span>
+    </div>
+    <script type="text/javascript">  
+    function $id(id){
+    	return document.getElementById(id);
+    }
+
+    var scrollFunc = function (e) {  
+        e = e || window.event;  
+        if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件               
+            if (e.wheelDelta > 0) { //当滑轮向上滚动时  
+                console.log("滑轮向上滚动");  
+                $id("header").classList.add("content-box");
+            }  
+            if (e.wheelDelta < 0) { //当滑轮向下滚动时  
+                console.log("滑轮向下滚动");
+                $id("header").classList.remove('content-box');
+            }  
+        } else if (e.detail) {  //Firefox滑轮事件  
+            if (e.detail> 0) { //当滑轮向上滚动时  
+                console.log("滑轮向上滚动");  
+                $id("header").classList.add("content-box");
+            }  
+            if (e.detail< 0) { //当滑轮向下滚动时  
+                console.log("滑轮向下滚动");  
+             	$id("header").classList.remove('content-box');
+            }  
+        }  
+    }  
+    //给页面绑定滑轮滚动事件  
+    if (document.addEventListener) {//firefox  
+        document.addEventListener('DOMMouseScroll', scrollFunc, false);  
+    }  
+    //滚动滑轮触发scrollFunc方法  //ie 谷歌  
+    window.onmousewheel = document.onmousewheel = scrollFunc;
+    </script>
+</body>
+</html>
